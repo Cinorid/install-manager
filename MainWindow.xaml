@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="352" Width="1002">
     <Grid>
-    <TextBox Height="204" HorizontalAlignment="Left" Margin="30,58,0,0" Name="textBox1" VerticalAlignment="Top" Width="911" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" />
+    <TextBox Height="136" HorizontalAlignment="Left" Margin="30,126,0,0" Name="textBox1" VerticalAlignment="Top" Width="911" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" />
+    <Label Content="Machine Name:" Height="28" HorizontalAlignment="Left" Margin="42,30,0,0" Name="lblMacName" VerticalAlignment="Top" />
+    <Label Content="Operating System:" Height="28" HorizontalAlignment="Left" Margin="42,64,0,0" Name="lblOsVersion" VerticalAlignment="Top" />
+    <Label Content="" Height="28" HorizontalAlignment="Left" Margin="155,64,0,0" Name="lblOSDescription" VerticalAlignment="Top" Width="611" Foreground="#FF333333" />
+    <Label Content="" Foreground="#FF333333" Height="28" HorizontalAlignment="Left" Margin="155,30,0,0" Name="lblMacNameDescription" VerticalAlignment="Top" Width="611" />
   </Grid>
 </Window>

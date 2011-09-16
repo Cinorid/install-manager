@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
   <ClientList>
-    <name>DRAKE</name>
-    <name>MORTON</name>
-    <name>MINOR</name>
+    <name></name>
   </ClientList>
   
   <Jenzabar>
