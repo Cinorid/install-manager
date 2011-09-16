@@ -1,1 +1,0 @@
-﻿\\hadbsvc\Jenzabar\EX\Client_Installs\3.6\EX-3.6-Setup.exe /S /V" /qn SETUPFILE="\\hadbsvc\Jenzabar\Script_Files\EX36Setup.txt"
