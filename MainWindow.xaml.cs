@@ -17,6 +17,7 @@ using System.Management.Automation;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
+using System.ComponentModel;
 
 namespace JenzabarSilentInstall {
   /// <summary>
@@ -29,6 +30,9 @@ namespace JenzabarSilentInstall {
     private string ConfigurationPath { get; set; }
 
     private List<string> ClientList = new List<string>();
+    private List<string> InstallList = new List<string>();
+
+    private BackgroundWorker installer = new BackgroundWorker();
 
     public MainWindow() {
       InitializeComponent();
@@ -44,6 +48,9 @@ namespace JenzabarSilentInstall {
           sr.Close();
         }
       }
+      else {
+        Application.Current.Shutdown(1);
+      }
 
       this.lblMacNameDescription.Content = Environment.MachineName;
       this.lblOSDescription.Content = String.Format("{0} 64 bit support: {1}", Environment.OSVersion, Environment.Is64BitOperatingSystem ? "Yes" : "No");
@@ -57,6 +64,12 @@ namespace JenzabarSilentInstall {
       }
       else {
         Application.Current.Shutdown(0);
+      }
+
+      foreach (XmlNode n in xmlDocument.SelectNodes("Configuration/*")) {
+        if (n.SelectSingleNode("install") != null) {
+          this.textBox1.Text += n.Name + "\r\n";
+        }
       }
        
 
