@@ -59,7 +59,29 @@
   </Jenzabar>
 
   <PowerFaids>
-    <allowed-machines />
+    <allowed-machines>
+      <name>CLEANMACHINE</name>
+      <name>DEAN-OF-SS</name>
+	  <name>DEAN-OF-SSNEW</name>
+	  <name>DIR-FINAID</name>
+	  <name>DIR-FINAIDNEW</name>
+	  <name>DRAKE</name>
+	  <name>FINAID-DIR</name>
+	  <name>FINAID-OFFICER</name>
+	  <name>IT-LOANER</name>
+	  <name>MCCOY</name>
+	  <name>MINOR</name>
+	  <name>MINORX64</name>
+	  <name>MORTON</name>
+	  <name>SS-ADMISSIONS</name>
+	  <name>SS-CASHIER</name>
+	  <name>SS-LOANER-01</name>
+	  <name>SS-LOANER-02</name>
+	  <name>SS-LOANER-LAP01</name>
+	  <name>SS-LOANER-LAP02</name>
+	  <name>SS-PHOTOID</name>
+	  <name>SS-SEC</name>
+    </allowed-machines>
     <install>
 	  <version>15.00.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
@@ -128,7 +150,7 @@
       <command type="cmd">setupgs.exe "C:\Program Files\gs"</command>
     </install>
   </GhostScript>
-
+  
   <SQLStudio>
     <allowed-machines>
       <name>DRAKE</name>
@@ -137,16 +159,24 @@
       <name>CLEANMACHINE</name>
     </allowed-machines>
     <install>
-      <version></version>
-      <command></command>
+      <version>10.50.1600.1</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN,SSMS,ADV_SSMS /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
+    </install>
+	<install>
+      <version>10.50.2500.0</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\%filename% /quiet</command>
     </install>
   </SQLStudio>
 
   <SQLCLientTools>
     <allowed-machines />
     <install>
-      <version></version>
-      <command></command>
+      <version>10.50.1600.1</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
+    </install>
+	<install>
+      <version>10.50.2500.0</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\%filename% /quiet</command>
     </install>
   </SQLCLientTools>
   
