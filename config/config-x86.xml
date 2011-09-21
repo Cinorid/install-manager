@@ -28,25 +28,42 @@
     <allowed-machines />
     <install>
 	  <version>15.00.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	</install>
+	<install>
 	  <version>15.01.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.1\151UpgradeInstall.exe</command>
+	</install>
+	<install>
 	  <version>15.02.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.2\152UpgradeInstall.exe</command>
+	</install>
+	<install>
 	  <version>15.03.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.3\153UpgradeInstall.exe</command>
+	</install>
+	<install>
 	  <version>15.04.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\powerfaids\Client_Files\15.4\154UpgradeInstall.exe</command>
+	</install>
+	<install>
 	  <version>16.00.300</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.0C\160CUpgradeInstall.exe</command>
+	</install>
+	<install>
 	  <version>16.1.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
-	  <version>16.03.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
-      <version>16.03.000</version>
-      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command>\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.1\161UpgradeInstall.exe</command>
+	</install>
+	<install>
+	  <version>16.02.000</version>
+      <command>\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.2\162UpgradeInstall.exe</command>
+	</install>
+	<install>
+      <version>16.03.200</version>
+      <command>\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.3B\163BUpgradeInstall.exe</command>
     </install>
   </PowerFaids>
+
 
   <InfomakerAdmin>
     <allowed-machines>
@@ -54,16 +71,16 @@
       <name>CLEANMACHINE</name>
     </allowed-machines>
     <install>
-      <version></version>
-      <command></command>
+      <version>11.5.1.4843</version>
+      <command>"\\hadbsvc.fhtc.lan\Jenzabar\Infomaker\InfoMaker_11.5.1.4843_FullVersion\InfoMaker_11.5.1_Setup.exe" /S /v" /qn IM_DB_WRITE_OPTION=1"</command>  
     </install>
   </InfomakerAdmin>
 
   <InfoMaker>
     <allowed-machines />
     <install>
-      <version></version>
-      <command></command>
+      <version>11.5.1.4843</version>
+      <command>"\\hadbsvc.fhtc.lan\Jenzabar\Infomaker\InfoMaker_11.5.1.4843_FullVersion\InfoMaker_11.5.1_Setup.exe" /S /v" /qn"</command>
     </install>
   </InfoMaker>
 
