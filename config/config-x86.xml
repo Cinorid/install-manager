@@ -7,15 +7,43 @@
   <Jenzabar>
     <allowed-machines />
     <install>
-      <version>4.0.1</version>
-      <command>\\hadbsvc\Jenzabar\EX\Client_Installs\3.6\EX-3.6-Setup.exe /S /V" /qn SETUPFILE="\\hadbsvc\Jenzabar\Script_Files\EX36Setup.txt"</command>
+      <version>4.0.0</version>
+      <command>\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0\EX_4.0.0_Setup.exe /S /V" /qn SETUPFILE="\\hadbsvc.fhtc.lan\Jenzabar\Script_Files\EX40Setup.txt"</command>
+	</install>
+	<install>  
+	  <version>4.0.1</version>
+      <command>"\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0.1\EX_4.0.1_Update.exe" /s /v/qn</command>
+	</install>
+	<install>
+	  <version>4.0.2</version>
+      <command>"\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0.2\EX_4.0.2_Update.exe" /s /v/qn</command>
     </install>
+	<uninstall>
+		<version>3</version>
+		<command>msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
+	</unistall>
   </Jenzabar>
 
   <PowerFaids>
     <allowed-machines />
     <install>
-      <version>16.03.200</version>
+	  <version>15.00.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>15.01.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>15.02.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>15.03.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>15.04.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>16.00.300</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>16.1.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  <version>16.03.000</version>
+      <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <version>16.03.000</version>
       <command>\\hadbsvc\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
     </install>
   </PowerFaids>
