@@ -164,7 +164,7 @@
     </install>
 	<install>
       <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\%filename% /quiet</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install>
   </SQLStudio>
 
@@ -176,7 +176,7 @@
     </install>
 	<install>
       <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\%filename% /quiet</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install>
   </SQLCLientTools>
   
