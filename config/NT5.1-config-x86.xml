@@ -85,39 +85,39 @@
     </allowed-machines>
     <install>
 	    <version>15.00.000</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\150NewInstall.exe</command>
 	  </install>
 	  <install>
 	    <version>15.01.000</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.1\151UpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\151Upgrade.exe</command>
 	  </install>
 	  <install>
 	    <version>15.02.000</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.2\152UpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\152Upgrade.exe</command>
 	  </install>
 	  <install>
 	    <version>15.03.000</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.3\153UpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\153Upgrade.exe</command>
 	  </install>
 	  <install>
 	    <version>15.04.000</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\15.4\154UpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\154Upgrade.exe</command>
 	  </install>
 	  <install>
 	    <version>16.00.300</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.0C\160CUpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\160CUpgrade.exe</command>
 	  </install>
 	  <install>
 	    <version>16.1.000</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.1\161UpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\161Upgrade.exe</command>
 	  </install>
 	  <install>
 	    <version>16.02.000</version>
-        <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.2\162UpgradeInstall.exe</command>
+        <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\162Upgrade.exe</command>
 	  </install>
 	  <install>
       <version>16.03.200</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.3B\163BUpgradeInstall.exe</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\163BUpgrade.exe</command>
     </install>
   </PowerFaids>
 
