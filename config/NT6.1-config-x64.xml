@@ -21,6 +21,7 @@
 	<name>DIR-FINAID</name>
 	<name>DIR-FOUND</name>
 	<name>DIR-HR</name>
+  <name>DRAKE</name>
 	<name>EXEC-ASSIST</name>
 	<name>FINAID-OFFICER</name>
 	<name>FOUND-ASSIST</name>
@@ -55,7 +56,7 @@
 	<uninstall>
 		<version>3</version>
 		<command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
-	</unistall>
+	</uninstall>
   </Jenzabar>
 
   <PowerFaids>
@@ -143,8 +144,8 @@
     <allowed-machines />
     <install>
 	  <copy-local>
-		<to>C:\Temp\GhostScript\gs871w32</to>
-		<from>\\hadbsvc.fhtc.lan\Jenzabar\GhostScript\gs871w32</from>
+		<to>C:\Temp\GhostScript\gs871w64</to>
+		<from>\\hadbsvc.fhtc.lan\Jenzabar\GhostScript\gs871w64</from>
 	  </copy-local>
       <version>8.71</version>
       <command type="cmd">setupgs.exe "C:\Program Files\gs"</command>
@@ -164,7 +165,7 @@
     </install>
 	<install>
       <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install>
   </SQLStudio>
 
@@ -176,7 +177,7 @@
     </install>
 	<install>
       <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install>
   </SQLCLientTools>
   
