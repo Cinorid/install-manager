@@ -18,72 +18,40 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.ComponentModel;
+using System.Threading;
+using System.Windows.Threading;
 
-namespace JenzabarSilentInstall {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
+namespace SilentInstall {
   public partial class MainWindow : Window {
 
     private XmlDocument xmlDocument = new XmlDocument();
-
     private string ConfigurationPath { get; set; }
-
-    private List<string> ClientList = new List<string>();
-    private List<string> InstallList = new List<string>();
-
-    private BackgroundWorker installer = new BackgroundWorker();
 
     public MainWindow() {
       InitializeComponent();
 
-      this.ConfigurationPath = Application.Current.Properties["ConfigurationPath"] != null ? Application.Current.Properties["ConfigurationPath"].ToString() : Environment.CurrentDirectory + @"\config\";
-      this.ConfigurationPath = Directory.Exists(ConfigurationPath) ? ConfigurationPath : Environment.CurrentDirectory + @"\config\";
-      this.ConfigurationPath += ConfigurationPath.EndsWith(@"\") ? "" : @"\";
-      this.ConfigurationPath += Environment.Is64BitOperatingSystem ? "config-x64.xml" : "config-x86.xml";
+      StringBuilder sb = new StringBuilder();
+      sb.AppendFormat("{0}", Environment.CurrentDirectory);
+      sb.AppendFormat(@"\config\NT{0}.", Environment.OSVersion.Version.Major.ToString());
+      sb.AppendFormat(@"{0}-config-x{1}.xml", Environment.OSVersion.Version.Minor.ToString(), Environment.Is64BitOperatingSystem ? "64" : "86");
 
-      if (File.Exists(ConfigurationPath)) {
-        using (StreamReader sr = new StreamReader(ConfigurationPath)) {
-          xmlDocument.LoadXml(sr.ReadToEnd());
+      this.ConfigurationPath = sb.ToString();
+
+      try {
+        using (StreamReader sr = new StreamReader(this.ConfigurationPath)) {
+          this.xmlDocument.LoadXml(sr.ReadToEnd());
           sr.Close();
         }
       }
-      else {
-        Application.Current.Shutdown(1);
-      }
-
-      this.lblMacNameDescription.Content = Environment.MachineName;
-      this.lblOSDescription.Content = String.Format("{0} 64 bit support: {1}", Environment.OSVersion, Environment.Is64BitOperatingSystem ? "Yes" : "No");
-
-      foreach (XmlNode n in xmlDocument.DocumentElement.SelectNodes("ClientList/name")) {
-        this.ClientList.Add(n.InnerText.Trim());
-      }
-
-      if (this.ClientList.Contains(Environment.MachineName)) {
+      catch (FileNotFoundException e) {
 
       }
-      else {
-        Application.Current.Shutdown(0);
+      catch (XmlException e) {
+
       }
+      catch (Exception e) {
 
-      foreach (XmlNode n in xmlDocument.SelectNodes("Configuration/*")) {
-        if (n.SelectSingleNode("install") != null) {
-          this.textBox1.Text += n.Name + "\r\n";
-        }
       }
-       
-
-        //if (File.Exists("config/sample.txt")) {
-        //  using (StreamReader sr = new StreamReader("config/sample.txt")) {
-        //    Process p = new Process();
-        //    p.StartInfo = new ProcessStartInfo("cmd", "/c " + sr.ReadToEnd());
-        //    p.Start();
-        //    p.WaitForExit();
-        //  }
-        //}
-      //}
-
-      
     }
   }
 }

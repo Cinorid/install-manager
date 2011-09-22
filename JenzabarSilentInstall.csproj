@@ -8,8 +8,8 @@
     <ProjectGuid>{F752DA9D-7059-4D69-8B4D-CAAEE0E5CCB6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JenzabarSilentInstall</RootNamespace>
-    <AssemblyName>JenzabarSilentInstall</AssemblyName>
+    <RootNamespace>SilentInstall</RootNamespace>
+    <AssemblyName>SilentInstall</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -17,7 +17,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>JenzabarSilentInstall.App</StartupObject>
+    <StartupObject>SilentInstall.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -59,6 +59,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Install.cs" />
+    <Compile Include="MaintenanceRegistry.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -89,14 +91,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config\config-x86.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="config\NT5.1-config-x86.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config\config-x64.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="config\NT6.1-config-x64.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="config\NT6.1-config-x86.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
