@@ -1,5 +1,43 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
+<<<<<<< .mine
+  <clients>
+	  <name>ACC-PAY</name>
+	  <name>ACC-REC</name>
+	  <name>ADMIN-LOANER01</name>
+	  <name>ADMIN-REP</name>
+	  <name>BECKER</name>
+	  <name>BIC-COORDINATO</name>
+	  <name>BI-INFO-SPEC</name>
+	  <name>BOOKSTMGR</name>
+	  <name>BOOKSTRMGR2</name>
+	  <name>CARMICHAELVM</name>
+	  <name>CLEANMACHINE</name>
+	  <name>CPD-ADJ-01</name>
+	  <name>DEAN-OF-INSTRNE</name>
+	  <name>DEAN-OF-SS</name>
+	  <name>DEMPEWOLF</name>
+	  <name>DIR-BA</name>
+	  <name>DIR-ENROLL</name>
+	  <name>DIR-FINAID</name>
+	  <name>DIR-FOUND</name>
+	  <name>DIR-HR</name>
+    <name>DRAKE</name>
+	  <name>EXEC-ASSIST</name>
+	  <name>FINAID-OFFICER</name>
+	  <name>FOUND-ASSIST</name>
+	  <name>HHS-SEC</name>
+	  <name>IT-LOANER</name>
+	  <name>JICSWEBPRDSRV</name>
+	  <name>MCCOY</name>
+	  <name>PRESIDENT</name>
+	  <name>SS-ADMISSIONS</name>
+	  <name>SS-CASHIER</name>
+	  <name>SS-LOANER-01</name>
+	  <name>SS-LOANER-02</name>
+	  <name>SS-PHOTOID</name>
+	  <name>SS-SEC</name>
+=======
   <ClientList>
 	<name>ACC-PAY</name>
 	<name>ACC-REC</name>
@@ -82,6 +120,93 @@
 	    <name>SS-LOANER-LAP02</name>
 	    <name>SS-PHOTOID</name>
 	    <name>SS-SEC</name>
+>>>>>>> .r18
+<<<<<<< .mine
+	  <name>THEATER-PODIUM</name>
+  </clients>
+
+  <install>
+    <name>Jenzabar EX</name>
+    <clients />
+    <registry latest-subkey="false" value-pair="ProductVersion">Software\Wow6432Node\Jenzabar\EX\4\Application</registry>
+    <remove-item>
+      <version>3.*.*</version>
+      <command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
+    </remove-item>
+    <install-item>
+      <version>4.0.0</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0\EX_4.0.0_Setup.exe /S /V" /qn SETUPFILE="\\hadbsvc.fhtc.lan\Jenzabar\Script_Files\EX40Setup.txt"</command>
+    </install-item>
+    <install-item>
+      <version>4.0.1</version>
+      <command type="cmd">"\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0.1\EX_4.0.1_Update.exe" /s /v/qn</command>
+    </install-item>
+    <install-item>
+      <version>4.0.2</version>
+      <command type="cmd">"\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0.2\EX_4.0.2_Update.exe" /s /v/qn</command>
+    </install-item>
+  </install>
+
+  <install>
+    <name>PowerFaids</name>
+    <registry latest-subkey="true" value-pair="">Software\Wow6432Node\College Board\PowerFAIDS</registry>
+    <clients>
+      <name>CLEANMACHINE</name>
+      <name>DEAN-OF-SS</name>
+	    <name>DEAN-OF-SSNEW</name>
+	    <name>DIR-FINAID</name>
+	    <name>DIR-FINAIDNEW</name>
+	    <name>DRAKE</name>
+	    <name>FINAID-DIR</name>
+	    <name>FINAID-OFFICER</name>
+	    <name>IT-LOANER</name>
+	    <name>MCCOY</name>
+	    <name>MINOR</name>
+	    <name>MINORX64</name>
+	    <name>MORTON</name>
+	    <name>SS-ADMISSIONS</name>
+	    <name>SS-CASHIER</name>
+	    <name>SS-LOANER-01</name>
+	    <name>SS-LOANER-02</name>
+	    <name>SS-LOANER-LAP01</name>
+	    <name>SS-LOANER-LAP02</name>
+	    <name>SS-PHOTOID</name>
+	    <name>SS-SEC</name>
+    </clients>
+    <install-item>
+	    <version>15.00.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.0\150NewInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>15.01.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.1\151UpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>15.02.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.2\152UpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>15.03.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Client_Files\15.3\153UpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>15.04.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\15.4\154UpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>16.00.300</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.0C\160CUpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>16.1.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.1\161UpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+	    <version>16.02.000</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Client_Files\16.2\162UpgradeInstall.exe</command>
+	  </install-item>
+	  <install-item>
+=======
     </allowed-machines>
     <install>
 	    <version>15.00.000</version>
@@ -116,69 +241,80 @@
         <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\162Upgrade.exe</command>
 	  </install>
 	  <install>
+>>>>>>> .r18
       <version>16.03.200</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\163BUpgrade.exe</command>
-    </install>
-  </PowerFaids>
+    </install-item>
+  </install>
 
-  <InfomakerAdmin>
-    <allowed-machines>
+  <install>
+    <name>InfoMaker Administration</name>
+    <clients>
       <name>MORTON</name>
       <name>CLEANMACHINE</name>
-    </allowed-machines>
-    <install>
+    </clients>
+    <registry latest-subkey="true" value-pair="Build">Software\Wow6432Node\Sybase\InfoMaker</registry>
+    <install-item>
       <version>11.5.1.4843</version>
-      <command type="cmd">"\\hadbsvc.fhtc.lan\Jenzabar\Infomaker\InfoMaker_11.5.1.4843_FullVersion\InfoMaker_11.5.1_Setup.exe" /S /v" /qn IM_DB_WRITE_OPTION=1"</command>  
-    </install>
-  </InfomakerAdmin>
+      <command type="cmd">"\\hadbsvc.fhtc.lan\Jenzabar\Infomaker\InfoMaker_11.5.1.4843_FullVersion\InfoMaker_11.5.1_Setup.exe" /S /v" /qn IM_DB_WRITE_OPTION=1"</command>
+    </install-item>
+  </install>
 
-  <InfoMaker>
-    <allowed-machines />
-    <install>
+  <install>
+    <name>InfoMaker Client</name>
+    <clients />
+    <registry latest-subkey="true" value-pair="Build">Software\Wow6432Node\Sybase\InfoMaker</registry>
+    <install-item>
       <version>11.5.1.4843</version>
       <command type="cmd">"\\hadbsvc.fhtc.lan\Jenzabar\Infomaker\InfoMaker_11.5.1.4843_FullVersion\InfoMaker_11.5.1_Setup.exe" /S /v" /qn"</command>
-    </install>
-  </InfoMaker>
- 
-  <GhostScript>
-    <allowed-machines />
-    <install>
-	  <copy-local>
-		<to>C:\Temp\GhostScript\gs871w64</to>
-		<from>\\hadbsvc.fhtc.lan\Jenzabar\GhostScript\gs871w64</from>
-	  </copy-local>
+    </install-item>
+  </install>
+
+  <install>
+    <name>GhostScript</name>
+    <clients />
+    <registry latest-subkey="true" value-pair="">Software\Wow6432Node\GPL Ghostscript</registry>
+    <install-item>
+      <copy>
+        <from>\\hadbsvc.fhtc.lan\Jenzabar\GhostScript\gs871w64</from>
+        <to>C:\Temp\GhostScript\gs871w64</to>
+      </copy>
       <version>8.71</version>
       <command type="cmd">setupgs.exe "C:\Program Files\gs"</command>
-    </install>
-  </GhostScript>
-  
-  <SQLStudio>
-    <allowed-machines>
+    </install-item>
+  </install>
+
+  <install>
+    <name>SQL Server Management Studio</name>
+    <clients>
       <name>DRAKE</name>
       <name>MORTON</name>
       <name>MINOR</name>
       <name>CLEANMACHINE</name>
-    </allowed-machines>
-    <install>
+    </clients>
+    <registry latest-subkey="false" value-pair="CurrentVersion">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
+    <install-item>
       <version>10.50.1600.1</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN,SSMS,ADV_SSMS /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install>
-	<install>
+    </install-item>
+    <install-item>
       <version>10.50.2500.0</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install>
-  </SQLStudio>
+    </install-item>
+  </install>
 
-  <SQLCLientTools>
-    <allowed-machines />
-    <install>
+  <install>
+    <name>SQL Server Management Studio</name>
+    <clients />
+    <registry latest-subkey="false" value-pair="CurrentVersion">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
+    <install-item>
       <version>10.50.1600.1</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install>
-	<install>
+    </install-item>
+    <install-item>
       <version>10.50.2500.0</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install>
-  </SQLCLientTools>
+    </install-item>
+  </install>
   
 </Configuration>
