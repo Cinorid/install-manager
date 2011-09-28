@@ -1,4 +1,25 @@
 ﻿cls
+
+$Clients = New-Object Collections.Generic.List[string];
+$xmlDoc = New-Object Xml.XmlDocument;
+
+try {
+  $loc = Get-Location;
+  $xmlDoc.Load("$loc\ClientList.xml");
+  $machineName = [System.Environment]::MachineName;
+  
+  foreach ($node in $xmlDoc.DocumentElement.SelectNodes("clients/name")) {
+    $Clients.Add($node.InnerText.Trim().ToUpper());
+  }
+  
+  if ($Clients.Contains($machineName)) {
+    Write-Host "Good";
+  }
+}
+catch {
+
+}
+
 $env:SEE_MASK_NOZONECHECKS = 1
 $WinInst45 = "\\hadbsvc.fhtc.lan\Jenzabar\SQL2008\x86\redist\Windows Installer\x86\INSTMSI45XP.EXE"
 $NETFrmWk35SP1x86 = "\\hadbsvc.fhtc.lan\Jenzabar\NET_Frmwk\dotNetFx35setupx86.exe"
