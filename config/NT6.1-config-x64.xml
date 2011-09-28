@@ -1,49 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-  <clients>
-    <name>ACC-PAY</name>
-    <name>ACC-REC</name>
-    <name>ADMIN-LOANER01</name>
-    <name>ADMIN-REP</name>
-    <name>BECKER</name>
-    <name>BIC-COORDINATO</name>
-    <name>BI-INFO-SPEC</name>
-    <name>BOOKSTMGR</name>
-    <name>BOOKSTRMGR2</name>
-    <name>CARMICHAELVM</name>
-    <name>CLEANMACHINE</name>
-    <name>CPD-ADJ-01</name>
-    <name>DEAN-OF-INSTRNE</name>
-    <name>DEAN-OF-SS</name>
-    <name>DEMPEWOLF</name>
-    <name>DIR-BA</name>
-    <name>DIR-ENROLL</name>
-    <name>DIR-FINAID</name>
-    <name>DIR-FOUND</name>
-    <name>DIR-HR</name>
-    <name>DRAKE</name>
-    <name>EXEC-ASSIST</name>
-    <name>FINAID-OFFICER</name>
-    <name>FOUND-ASSIST</name>
-    <name>HHS-SEC</name>
-    <name>IT-LOANER</name>
-    <name>JICSWEBPRDSRV</name>
-    <name>MCCOY</name>
-    <name>PRESIDENT</name>
-    <name>SS-ADMISSIONS</name>
-    <name>SS-CASHIER</name>
-    <name>SS-LOANER-01</name>
-    <name>SS-LOANER-02</name>
-    <name>SS-PHOTOID</name>
-    <name>SS-SEC</name>
-  </clients>
-
   <install>
     <name>Jenzabar EX</name>
     <clients />
     <registry latest-subkey="false" value-pair="ProductVersion">Software\Wow6432Node\Jenzabar\EX\4\Application</registry>
     <remove-item>
-      <version>3.*.*</version>
+      <version>3.0</version>
       <command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
     </remove-item>
     <install-item>
