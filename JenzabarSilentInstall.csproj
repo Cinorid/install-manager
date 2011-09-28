@@ -97,6 +97,7 @@
   <ItemGroup>
     <Content Include="config\NT6.1-config-x64.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>

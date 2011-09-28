@@ -28,6 +28,18 @@ namespace SilentInstall {
     private string ConfigurationPath { get; set; }
     private BackgroundWorker installer = new BackgroundWorker();
 
+    private List<string> ClientList {
+      get {
+        List<string> list = new List<string>();
+
+        foreach (XmlNode xnode in this.xmlDocument.DocumentElement.SelectNodes("clients/name")) {
+          list.Add(xnode.InnerText.Trim().ToUpper());
+        }
+
+        return list;
+      }
+    }
+
     private string Authentication {
       get { return Convert.ToString(Application.Current.Properties["Authentication"]); }
     }
@@ -72,6 +84,10 @@ namespace SilentInstall {
 
     private void ThreadedWorker(object sender, DoWorkEventArgs e) {
       this.WriteOutput(this.ConfigurationPath);
+
+      foreach (string s in this.ClientList) {
+        this.WriteOutput(s);
+      }
       foreach (XmlNode xnode in xmlDocument.DocumentElement.SelectNodes("*")) {
         if (xnode.SelectSingleNode("./install") != null) {
           Installation inst = new Installation() { InstallationNode = xnode, Name = xnode.Name };
