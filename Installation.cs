@@ -29,10 +29,16 @@ namespace SilentInstall {
           string kvp = xn.Attributes["value-pair"] != null ? xn.Attributes["value-pair"].InnerText.Trim() : "";
           string path = xn.InnerText.Trim();
 
+          
           using (RegistryKey key = Registry.LocalMachine.OpenSubKey(path)) {
-            if (kvp.Length > 0 && subkey == "false") { v = Convert.ToString(key.GetValue(kvp)); }
-            if (kvp.Length == 0 && subkey == "true") { v = key.SubKeyCount > 0 ? key.GetSubKeyNames()[key.SubKeyCount - 1] : "0.0.0.0"; }
-            if (kvp.Length > 0 && subkey == "true") { v = key.SubKeyCount > 0 ? Convert.ToString(key.OpenSubKey((key.GetSubKeyNames()[key.SubKeyCount - 1])).GetValue(kvp)) : "0.0.0.0"; }
+            if (key != null) {
+              if (kvp.Length > 0 && subkey == "false") { v = Convert.ToString(key.GetValue(kvp)); }
+              if (kvp.Length == 0 && subkey == "true") { v = key.SubKeyCount > 0 ? key.GetSubKeyNames()[key.SubKeyCount - 1] : "0.0.0.0"; }
+              if (kvp.Length > 0 && subkey == "true") { v = key.SubKeyCount > 0 ? Convert.ToString(key.OpenSubKey((key.GetSubKeyNames()[key.SubKeyCount - 1])).GetValue(kvp)) : "0.0.0.0"; }
+            }
+            else {
+              v = "0.0.0.0";
+            }
           }
         }
 
@@ -91,6 +97,22 @@ namespace SilentInstall {
       get {
         XmlNode xn = this.ItemNode.SelectSingleNode("./command");
         string n = xn != null ? xn.InnerText : "";
+        return n;
+      }
+    }
+
+    public string CopyFrom {
+      get {
+        XmlNode xn = this.ItemNode.SelectSingleNode("./copy/from");
+        string n = xn != null ? xn.InnerText.Trim() : "";
+        return n;
+      }
+    }
+
+    public string CopyTo {
+      get {
+        XmlNode xn = this.ItemNode.SelectSingleNode("./copy/to");
+        string n = xn != null ? xn.InnerText.Trim() : "";
         return n;
       }
     }

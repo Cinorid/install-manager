@@ -15,7 +15,7 @@ namespace SilentInstall {
 
     [DllImportAttribute("user32.dll", EntryPoint="BlockInput")]
     [return: System.Runtime.InteropServices.MarshalAsAttribute(UnmanagedType.Bool)]
-    public static extern  bool BlockInput([System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)] bool fBlockIt);
+    public static extern bool BlockInput([System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.Bool)] bool fBlockIt);
 
 
     public static void BlockMouseKeyboard(TimeSpan span) {

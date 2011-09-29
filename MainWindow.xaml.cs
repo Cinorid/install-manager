@@ -8,6 +8,7 @@ using System.Xml;
 using System.ComponentModel;
 using System.Threading;
 using System.Windows.Threading;
+using System.Diagnostics;
 
 namespace SilentInstall {
   public partial class MainWindow : Window {
@@ -80,6 +81,8 @@ namespace SilentInstall {
     }
 
     private void ThreadedWorker(object sender, DoWorkEventArgs e) {
+      App.BlockInput(true);
+
       List<Installation> Installations = new List<Installation>();
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("install")) {
@@ -87,24 +90,29 @@ namespace SilentInstall {
       }
 
       foreach (Installation i in Installations) {
-        //WriteOutput(String.Format("{0} : {1}", i.Name, i.CurrentVersion));
         if (i.CurrentVersion == "0.0.0.0") {
           foreach (InstallationItem item in i.InstallItems) {
             if (this.Debug == "true") {
               WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-              Thread.Sleep(5000);
+
+              InstallSoftware(item, i);
+
               WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
             }
             else {
               if (i.Clients.Count > 0 && i.Clients.Contains(Environment.MachineName)) {
                 WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-                Thread.Sleep(5000);
+
+                InstallSoftware(item, i);
+
                 WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
               }
               else {
                 if (this.ClientList.Contains(Environment.MachineName)) {
                   WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-                  Thread.Sleep(5000);
+
+                  InstallSoftware(item, i);
+
                   WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
                 }
               }
@@ -116,39 +124,81 @@ namespace SilentInstall {
             if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
               if (this.Debug == "true") {
                 WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-                Thread.Sleep(5000);
+
+                InstallSoftware(item, i);
+
                 WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
               }
               else {
                 if (i.Clients.Count > 0 && i.Clients.Contains(Environment.MachineName)) {
                   WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-                  Thread.Sleep(5000);
+
+                  InstallSoftware(item, i);
+
                   WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
                 }
                 else {
                   if (this.ClientList.Contains(Environment.MachineName)) {
                     WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-                    Thread.Sleep(5000);
+
+                    InstallSoftware(item, i);
+
                     WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
                   }
                 }
               }
-            }
+            }         
           }
         }
       }
-
+      App.BlockInput(false);
     }
 
     private void WriteOutput(string message) {
       if (this.textBox1.Dispatcher.CheckAccess()) {
         this.textBox1.AppendText(message + "\r\n");
+        this.textBox1.ScrollToEnd();
       }
       else {
         this.textBox1.Dispatcher.Invoke(DispatcherPriority.Normal, new Action( delegate() {
           this.textBox1.AppendText(message + "\r\n");
+          this.textBox1.ScrollToEnd();
         }));
       }
+    }
+
+    private void InstallSoftware(InstallationItem item, Installation i) {
+      if (item.CommandType.ToLower() == "cmd") {
+        using (Process p = new Process()) {
+          ProcessStartInfo sinfo = new ProcessStartInfo("cmd", "/c " + item.CommandText);
+
+          if (item.CopyFrom.Length > 0 && item.CopyTo.Length > 0) {
+            CopyDirectoryRecursive(new DirectoryInfo(item.CopyFrom), new DirectoryInfo(item.CopyTo));
+            sinfo.WorkingDirectory = item.CopyTo;
+          }
+
+          sinfo.WindowStyle = ProcessWindowStyle.Hidden;
+          p.StartInfo = sinfo;
+          p.Start();
+          p.WaitForExit();
+        }
+      }
+    }
+
+    private static void CopyDirectoryRecursive(DirectoryInfo source, DirectoryInfo target)  {
+
+        if (Directory.Exists(target.FullName) == false) {
+            Directory.CreateDirectory(target.FullName);
+        }
+
+        foreach (FileInfo fi in source.GetFiles()) {
+            fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
+        }
+
+        foreach (DirectoryInfo SubDirectory in source.GetDirectories()) {
+            DirectoryInfo nextDirectory = target.CreateSubdirectory(SubDirectory.Name);
+            CopyDirectoryRecursive(SubDirectory, nextDirectory);
+        }
     }
 
   }
