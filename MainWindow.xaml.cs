@@ -23,7 +23,7 @@ namespace SilentInstall {
 
         XmlDocument xd = new XmlDocument();
         try {
-          xd.Load(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location + @"\config\ClientList.xml");
+          xd.Load(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location + @"\config\ClientList.xml"));
 
           foreach (XmlNode xnode in xd.DocumentElement.SelectNodes("clients/name")) {
             list.Add(xnode.InnerText.Trim().ToUpper());
@@ -86,6 +86,8 @@ namespace SilentInstall {
 
       foreach (Installation i in Installations) {
           foreach (InstallationItem item in i.InstallItems) {
+            InstallSoftware(item, i);
+
             if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
               if (this.Debug == "true") {
                 InstallSoftware(item, i);
@@ -115,7 +117,7 @@ namespace SilentInstall {
     }
 
     private void InstallSoftware(InstallationItem item, Installation i) {
-      WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
+      WriteOutput(String.Format("Installing {0} version {1} current version {2} ...", i.Name, item.Version, i.CurrentVersion));
 
       if (item.CommandType.ToLower() == "cmd") {
         using (Process p = new Process()) {
@@ -129,12 +131,8 @@ namespace SilentInstall {
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
 
-          
-
           p.Start();
           p.WaitForExit();
-
-          
         }
       }
 
