@@ -77,7 +77,7 @@ namespace SilentInstall {
     }
 
     private void ThreadedWorker(object sender, DoWorkEventArgs e) {
-      App.BlockInput(true);
+      //App.BlockInput(true);
 
       List<Installation> Installations = new List<Installation>();
 
@@ -147,7 +147,7 @@ namespace SilentInstall {
           }
         }
       }
-      App.BlockInput(false);
+      //App.BlockInput(false);
     }
 
     private void WriteOutput(string message) {
