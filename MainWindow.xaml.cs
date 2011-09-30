@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Threading;
 using System.Diagnostics;
 using System.Reflection;
+using System.Windows.Input;
 
 namespace SilentInstall {
   public partial class MainWindow : Window {
@@ -57,6 +58,9 @@ namespace SilentInstall {
       InitializeComponent();
 
       installer.DoWork += new DoWorkEventHandler(ThreadedWorker);
+      this.MouseLeftButtonDown += delegate(object sender, MouseButtonEventArgs e) {
+        this.DragMove();
+      };
 
       try {
         this.xmlDocument.Load(this.ConfigurationPath);
@@ -137,8 +141,8 @@ namespace SilentInstall {
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
 
-          p.Start();
-          p.WaitForExit();
+          //p.Start();
+          //p.WaitForExit();
         }
       }
 
