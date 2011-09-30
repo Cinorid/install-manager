@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Threading;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace SilentInstall {
   public partial class MainWindow : Window {
@@ -38,7 +39,7 @@ namespace SilentInstall {
     private string ConfigurationPath {
       get {
         StringBuilder sb = new StringBuilder();
-        sb.AppendFormat("{0}", Environment.CurrentDirectory);
+        sb.AppendFormat("{0}", Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
         sb.AppendFormat(@"\config\NT{0}.", Environment.OSVersion.Version.Major.ToString());
         sb.AppendFormat(@"{0}-config-x{1}.xml", Environment.OSVersion.Version.Minor.ToString(), Environment.Is64BitOperatingSystem ? "64" : "86");
 
@@ -48,7 +49,7 @@ namespace SilentInstall {
     private string Authentication {
       get { return Convert.ToString(Application.Current.Properties["Authentication"]); }
     }
-    private string Debug {
+    private string Debug { 
       get { return Convert.ToString(Application.Current.Properties["Debug"]); }
     }
 
@@ -59,6 +60,7 @@ namespace SilentInstall {
 
       try {
         this.xmlDocument.Load(this.ConfigurationPath);
+        this.installer.RunWorkerAsync();
       }
       catch (FileNotFoundException) {
         MessageBox.Show("Could not locate config file, make sure the \\config folder is in the same folder as the .exe", "File Not Found");
@@ -72,12 +74,6 @@ namespace SilentInstall {
         MessageBox.Show("The application encountered a critical exception and must close.", "Critical Exception");
         Application.Current.Shutdown(2);
       }
-
-      //System.Version v = new System.Version("3.6.7.1");
-      //WriteOutput(v.CompareTo(new System.Version("3.6.7.2")).ToString());
-
-
-      this.installer.RunWorkerAsync();
     }
 
     private void ThreadedWorker(object sender, DoWorkEventArgs e) {
