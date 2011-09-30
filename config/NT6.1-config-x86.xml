@@ -27,6 +27,7 @@
     <registry latest-subkey="true" value-pair="">Software\College Board\PowerFAIDS</registry>
     <clients>
 		<name>EX4WIN7X64</name>
+		<name>EX4WIN7X86</name>
       <name>CLEANMACHINE</name>
       <name>DEAN-OF-SS</name>
 	    <name>DEAN-OF-SSNEW</name>

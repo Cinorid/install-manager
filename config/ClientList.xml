@@ -22,6 +22,8 @@
     <name>DIR-FOUND</name>
     <name>DIR-HR</name>
     <name>DRAKE</name>
+	<name>EX4WIN7X64</name>
+	<name>EX4WIN7X86</name>
     <name>EXEC-ASSIST</name>
     <name>FINAID-OFFICER</name>
     <name>FOUND-ASSIST</name>
@@ -29,7 +31,7 @@
     <name>IT-LOANER</name>
     <name>JICSWEBPRDSRV</name>
     <name>MCCOY</name>
-	  <name>MINORX64</name>
+	<name>MINORX64</name>
     <name>PRESIDENT</name>
     <name>SS-ADMISSIONS</name>
     <name>SS-CASHIER</name>

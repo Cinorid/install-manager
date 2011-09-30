@@ -3,7 +3,7 @@
   <install>
     <name>Jenzabar EX</name>
     <clients />
-    <registry latest-subkey="false" value-pair="ProductVersion">Software\Wow6432Node\Jenzabar\EX\4\Application</registry>
+    <registry latest-subkey="false" value-pair="ProductVersion">Software\Jenzabar\EX\4\Application</registry>
     <remove-item>
       <version>3.0</version>
       <command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
@@ -26,61 +26,63 @@
     <name>PowerFaids</name>
     <registry latest-subkey="true" value-pair="">Software\College Board\PowerFAIDS</registry>
     <clients>
+		<name>EX4WIN7X64</name>
+		<name>EX4WIN7X86</name>
       <name>CLEANMACHINE</name>
       <name>DEAN-OF-SS</name>
-      <name>DEAN-OF-SSNEW</name>
-      <name>DIR-FINAID</name>
-      <name>DIR-FINAIDNEW</name>
-      <name>DRAKE</name>
-      <name>FINAID-DIR</name>
-      <name>FINAID-OFFICER</name>
-      <name>IT-LOANER</name>
-      <name>MCCOY</name>
-      <name>MINOR</name>
-      <name>MINORX64</name>
-      <name>MORTON</name>
-      <name>SS-ADMISSIONS</name>
-      <name>SS-CASHIER</name>
-      <name>SS-LOANER-01</name>
-      <name>SS-LOANER-02</name>
-      <name>SS-LOANER-LAP01</name>
-      <name>SS-LOANER-LAP02</name>
-      <name>SS-PHOTOID</name>
-      <name>SS-SEC</name>
+	    <name>DEAN-OF-SSNEW</name>
+	    <name>DIR-FINAID</name>
+	    <name>DIR-FINAIDNEW</name>
+	    <name>DRAKE</name>
+	    <name>FINAID-DIR</name>
+	    <name>FINAID-OFFICER</name>
+	    <name>IT-LOANER</name>
+	    <name>MCCOY</name>
+	    <name>MINOR</name>
+	    <name>MINORX64</name>
+	    <name>MORTON</name>
+	    <name>SS-ADMISSIONS</name>
+	    <name>SS-CASHIER</name>
+	    <name>SS-LOANER-01</name>
+	    <name>SS-LOANER-02</name>
+	    <name>SS-LOANER-LAP01</name>
+	    <name>SS-LOANER-LAP02</name>
+	    <name>SS-PHOTOID</name>
+	    <name>SS-SEC</name>
     </clients>
     <install-item>
-      <version>15.00.000</version>
+	    <version>15.00.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Script_Files\150NewInstall.exe</command>
-    </install-item>
-    <install-item>
-      <version>15.01.000</version>
+	  </install-item>
+	  <install-item>
+	    <version>15.01.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Script_Files\151Upgrade.exe</command>
-    </install-item>
-    <install-item>
-      <version>15.02.000</version>
+	  </install-item>
+	  <install-item>
+	    <version>15.02.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Script_Files\152Upgrade.exe</command>
-    </install-item>
-    <install-item>
-      <version>15.03.000</version>
+	  </install-item>
+	  <install-item>
+	    <version>15.03.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Powerfaids\Script_Files\153Upgrade.exe</command>
-    </install-item>
-    <install-item>
-      <version>15.04.000</version>
+	  </install-item>
+	  <install-item>
+	    <version>15.04.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Script_Files\154Upgrade.exe</command>
-    </install-item>
-    <install-item>
-      <version>16.00.300</version>
+	  </install-item>
+	  <install-item>
+	    <version>16.00.300</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Script_Files\160CUpgrade.exe</command>
-    </install-item>
-    <install-item>
-      <version>16.1.000</version>
+	  </install-item>
+	  <install-item>
+	    <version>16.1.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Script_Files\161Upgrade.exe</command>
-    </install-item>
-    <install-item>
-      <version>16.02.000</version>
+	  </install-item>
+	  <install-item>
+	    <version>16.02.000</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\powerfaids\Script_Files\162Upgrade.exe</command>
-    </install-item>
-    <install-item>
+	  </install-item>
+	  <install-item>
       <version>16.03.200</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\PowerFaids\Script_Files\163BUpgrade.exe</command>
     </install-item>
@@ -115,8 +117,8 @@
     <registry latest-subkey="true" value-pair="">Software\GPL Ghostscript</registry>
     <install-item>
       <copy>
-        <from>\\hadbsvc.fhtc.lan\Jenzabar\GhostScript\gs871w64</from>
-        <to>C:\Temp\GhostScript\gs871w64</to>
+        <from>\\hadbsvc.fhtc.lan\Jenzabar\GhostScript\gs871w32</from>
+        <to>C:\Temp\GhostScript\gs871w32</to>
       </copy>
       <version>8.71</version>
       <command type="cmd">setupgs.exe "C:\Program Files\gs"</command>
@@ -126,6 +128,7 @@
   <install>
     <name>SQL Server Management Studio</name>
     <clients>
+		<name>EX4WIN7X64</name>
       <name>DRAKE</name>
       <name>MORTON</name>
       <name>MINOR</name>
@@ -138,7 +141,7 @@
     </install-item>
     <install-item>
       <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install-item>
   </install>
 
@@ -152,8 +155,7 @@
     </install-item>
     <install-item>
       <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install-item>
   </install>
-  
 </Configuration>
