@@ -31,7 +31,7 @@
 	    <name>DEAN-OF-SSNEW</name>
 	    <name>DIR-FINAID</name>
 	    <name>DIR-FINAIDNEW</name>
-	    <name>DRAKE</name>
+      <name>DRAKE</name>
 	    <name>FINAID-DIR</name>
 	    <name>FINAID-OFFICER</name>
 	    <name>IT-LOANER</name>
@@ -126,7 +126,6 @@
   <install>
     <name>SQL Server Management Studio</name>
     <clients>
-      <name>DRAKE</name>
       <name>MORTON</name>
       <name>MINOR</name>
       <name>CLEANMACHINE</name>

@@ -23,7 +23,7 @@ namespace SilentInstall {
 
         XmlDocument xd = new XmlDocument();
         try {
-          xd.Load(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location + @"\config\ClientList.xml"));
+          xd.Load(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\config\ClientList.xml");
 
           foreach (XmlNode xnode in xd.DocumentElement.SelectNodes("clients/name")) {
             list.Add(xnode.InnerText.Trim().ToUpper());
@@ -77,7 +77,6 @@ namespace SilentInstall {
     }
 
     private void ThreadedWorker(object sender, DoWorkEventArgs e) {
-      //App.BlockInput(true);
       List<Installation> Installations = new List<Installation>();
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("install")) {
@@ -85,26 +84,25 @@ namespace SilentInstall {
       }
 
       foreach (Installation i in Installations) {
-          foreach (InstallationItem item in i.InstallItems) {
-            InstallSoftware(item, i);
+        foreach (InstallationItem item in i.InstallItems) {
 
-            if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
-              if (this.Debug == "true") {
+          if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
+            if (this.Debug == "true") {
+              InstallSoftware(item, i);
+            }
+            else {
+              if (i.Clients.Contains(Environment.MachineName)) {
+                InstallSoftware(item, i);
+                break;
+              }
+
+              if (this.ClientList.Contains(Environment.MachineName)) {
                 InstallSoftware(item, i);
               }
-              else {
-                if (i.Clients.Count > 0 && i.Clients.Contains(Environment.MachineName)) {
-                  InstallSoftware(item, i);
-                  break;
-                }
-                else if (this.ClientList.Contains(Environment.MachineName)) {
-                    InstallSoftware(item, i);
-                }
-              }
-            }         
+            }
           }
         }
-      //App.BlockInput(false);
+      }
     }
 
     private void WriteOutput(string message) {
@@ -140,8 +138,8 @@ namespace SilentInstall {
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
 
-          p.Start();
-          p.WaitForExit();
+          //p.Start();
+          //p.WaitForExit();
         }
       }
 
