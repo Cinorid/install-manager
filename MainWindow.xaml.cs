@@ -23,7 +23,7 @@ namespace SilentInstall {
 
         XmlDocument xd = new XmlDocument();
         try {
-          xd.Load(Environment.CurrentDirectory + @"\config\ClientList.xml");
+          xd.Load(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location + @"\config\ClientList.xml");
 
           foreach (XmlNode xnode in xd.DocumentElement.SelectNodes("clients/name")) {
             list.Add(xnode.InnerText.Trim().ToUpper());
@@ -66,11 +66,11 @@ namespace SilentInstall {
         MessageBox.Show("Could not locate config file, make sure the \\config folder is in the same folder as the .exe", "File Not Found");
         Application.Current.Shutdown(1);
       }
-      catch (XmlException e) {
+      catch (XmlException) {
         MessageBox.Show("The configuration file was an invalid xml file. Pleas make sure to validate your configuraiton file.", "XML Syntax");
         Application.Current.Shutdown(1);
       }
-      catch (Exception e) {
+      catch (Exception) {
         MessageBox.Show("The application encountered a critical exception and must close.", "Critical Exception");
         Application.Current.Shutdown(2);
       }
