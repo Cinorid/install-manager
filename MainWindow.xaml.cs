@@ -93,7 +93,6 @@ namespace SilentInstall {
             else {
               if (i.Clients.Contains(Environment.MachineName)) {
                 InstallSoftware(item, i);
-                break;
               }
 
               if (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName)) {
