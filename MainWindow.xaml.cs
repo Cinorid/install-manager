@@ -78,7 +78,6 @@ namespace SilentInstall {
 
     private void ThreadedWorker(object sender, DoWorkEventArgs e) {
       //App.BlockInput(true);
-
       List<Installation> Installations = new List<Installation>();
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("install")) {
@@ -86,67 +85,19 @@ namespace SilentInstall {
       }
 
       foreach (Installation i in Installations) {
-        if (i.CurrentVersion == "0.0.0.0") {
-          foreach (InstallationItem item in i.InstallItems) {
-            if (this.Debug == "true") {
-              WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-
-              InstallSoftware(item, i);
-
-              WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
-            }
-            else {
-              if (i.Clients.Count > 0 && i.Clients.Contains(Environment.MachineName)) {
-                WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-
-                InstallSoftware(item, i);
-
-                WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
-              }
-              else {
-                if (this.ClientList.Contains(Environment.MachineName)) {
-                  WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-
-                  InstallSoftware(item, i);
-
-                  WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
-                }
-              }
-            }
-          }
-        }
-        else {
           foreach (InstallationItem item in i.InstallItems) {
             if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
               if (this.Debug == "true") {
-                WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-
                 InstallSoftware(item, i);
-
-                WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
               }
               else {
-                if (i.Clients.Count > 0 && i.Clients.Contains(Environment.MachineName)) {
-                  WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-
+                if (i.Clients.Contains(Environment.MachineName.ToUpper()) || this.ClientList.Contains(Environment.MachineName.ToUpper())) {
                   InstallSoftware(item, i);
-
-                  WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
-                }
-                else {
-                  if (this.ClientList.Contains(Environment.MachineName)) {
-                    WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
-
-                    InstallSoftware(item, i);
-
-                    WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
-                  }
                 }
               }
             }         
           }
         }
-      }
       //App.BlockInput(false);
     }
 
@@ -164,6 +115,8 @@ namespace SilentInstall {
     }
 
     private void InstallSoftware(InstallationItem item, Installation i) {
+      WriteOutput(String.Format("Installing {0} version {1}...", i.Name, item.Version));
+
       if (item.CommandType.ToLower() == "cmd") {
         using (Process p = new Process()) {
           ProcessStartInfo sinfo = new ProcessStartInfo("cmd", "/c " + item.CommandText);
@@ -175,10 +128,17 @@ namespace SilentInstall {
 
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
+
+          
+
           p.Start();
           p.WaitForExit();
+
+          
         }
       }
+
+      WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
     }
 
     private static void CopyDirectoryRecursive(DirectoryInfo source, DirectoryInfo target)  {
