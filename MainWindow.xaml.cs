@@ -96,7 +96,7 @@ namespace SilentInstall {
                 break;
               }
 
-              if (this.ClientList.Contains(Environment.MachineName)) {
+              if (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName)) {
                 InstallSoftware(item, i);
               }
             }
@@ -138,8 +138,8 @@ namespace SilentInstall {
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
 
-          //p.Start();
-          //p.WaitForExit();
+          p.Start();
+          p.WaitForExit();
         }
       }
 
