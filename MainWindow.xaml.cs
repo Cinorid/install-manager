@@ -93,7 +93,10 @@ namespace SilentInstall {
                 InstallSoftware(item, i);
               }
               else {
-                if (i.Clients.Contains(Environment.MachineName.ToUpper()) || this.ClientList.Contains(Environment.MachineName.ToUpper())) {
+                if (i.Clients.Count > 0 && i.Clients.Contains(Environment.MachineName)) {
+                  InstallSoftware(item, i);
+                }
+                else if (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName)) {
                   InstallSoftware(item, i);
                 }
               }
@@ -117,7 +120,12 @@ namespace SilentInstall {
     }
 
     private void InstallSoftware(InstallationItem item, Installation i) {
-      WriteOutput(String.Format("Installing {0} version {1} current version {2} ...", i.Name, item.Version, i.CurrentVersion));
+      if (i.CurrentVersion == "0.0.0.0") {
+        WriteOutput(String.Format("Installing {0} version {1} ...", i.Name, item.Version));
+      }
+      else {
+        WriteOutput(String.Format("Upgrading {0} version {1} to version {2}", i.Name, i.CurrentVersion, item.Version));
+      }
 
       if (item.CommandType.ToLower() == "cmd") {
         using (Process p = new Process()) {
