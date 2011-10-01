@@ -129,19 +129,28 @@ namespace SilentInstall {
           }        
         }
       }
-      //WriteOutput("");
-      //WriteOutput("All software upgrades/installations are finished.");
-      //WriteOutput("The software update is now complete and will close shortly. Thank you!");
-      //Thread.Sleep(4000);
-      //App.Current.Shutdown(0);
+
+      WriteOutput("");
+      WriteOutput("All software upgrades/installations are finished.");
+      WriteOutput("The software update is now complete and will close shortly. Thank you!");
+      Thread.Sleep(4000);
+
+      ThreadStart ts = delegate() {
+        Dispatcher.BeginInvoke(new Action(delegate() {
+          Application.Current.Shutdown();
+        }));
+      };
+
+      new Thread(ts).Start();
     }
 
+    #region "Threading Delegate Dispatcher Functions"
     private void AdjustProgress() {
       if (this.progressBar1.Dispatcher.CheckAccess()) {
         this.progressBar1.Value++;
       }
       else {
-        this.progressBar1.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate() {
+        this.progressBar1.Dispatcher.BeginInvoke(new Action(delegate() {
           this.progressBar1.Value++;
         }));
       }
@@ -153,7 +162,7 @@ namespace SilentInstall {
         this.progressBar1.Maximum = max;
       }
       else {
-        this.progressBar1.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate() {
+        this.progressBar1.Dispatcher.BeginInvoke(new Action(delegate() {
           this.progressBar1.Value = 0;
           this.progressBar1.Maximum = max;
         }));
@@ -166,12 +175,13 @@ namespace SilentInstall {
         this.textBox1.ScrollToEnd();
       }
       else {
-        this.textBox1.Dispatcher.Invoke(DispatcherPriority.Normal, new Action( delegate() {
+        this.textBox1.Dispatcher.Invoke(new Action( delegate() {
           this.textBox1.AppendText(message + "\r\n");
           this.textBox1.ScrollToEnd();
         }));
       }
     }
+    #endregion
 
     private void InstallSoftware(InstallationItem item, Installation i) {
       if (i.CurrentVersion == "0.0.0.0") {
@@ -192,7 +202,7 @@ namespace SilentInstall {
 
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
-
+          
           p.Start();
           p.WaitForExit();
         }
@@ -201,21 +211,19 @@ namespace SilentInstall {
       WriteOutput(String.Format("{0} version {1} installation finished.", i.Name, item.Version));
     }
 
-    private static void CopyDirectoryRecursive(DirectoryInfo source, DirectoryInfo target)  {
+    private static void CopyDirectoryRecursive(DirectoryInfo source, DirectoryInfo target) {
+      if (Directory.Exists(target.FullName) == false) {
+        Directory.CreateDirectory(target.FullName);
+      }
 
-        if (Directory.Exists(target.FullName) == false) {
-            Directory.CreateDirectory(target.FullName);
-        }
+      foreach (FileInfo fi in source.GetFiles()) {
+        fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
+      }
 
-        foreach (FileInfo fi in source.GetFiles()) {
-            fi.CopyTo(Path.Combine(target.ToString(), fi.Name), true);
-        }
-
-        foreach (DirectoryInfo SubDirectory in source.GetDirectories()) {
-            DirectoryInfo nextDirectory = target.CreateSubdirectory(SubDirectory.Name);
-            CopyDirectoryRecursive(SubDirectory, nextDirectory);
-        }
+      foreach (DirectoryInfo SubDirectory in source.GetDirectories()) {
+        DirectoryInfo nextDirectory = target.CreateSubdirectory(SubDirectory.Name);
+        CopyDirectoryRecursive(SubDirectory, nextDirectory);
+      }
     }
-
   }
 }
