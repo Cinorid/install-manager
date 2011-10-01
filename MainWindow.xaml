@@ -9,6 +9,7 @@
       
       <ProgressBar Height="23" HorizontalAlignment="Center" Margin="0,330,0,0" Name="progressBar1" VerticalAlignment="Top" Width="345" Foreground="#FF880000" Background="#FF880000" />
       <Label Content="Version: " Height="28" HorizontalAlignment="Right" Margin="0,0,6,6" Name="versionLabel" VerticalAlignment="Bottom" Foreground="#ffefefef"  />
+      <Image Height="130" HorizontalAlignment="Left" Margin="0,0,0,0" Name="image1" VerticalAlignment="Top" Width="596" Source="/SilentInstall;component/logo.png" />
     </Grid>
   </Border>
 </Window>

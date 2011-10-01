@@ -97,6 +97,7 @@
     <Content Include="config\NT5.1-config-x86.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\NT6.1-config-x64.xml">
