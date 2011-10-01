@@ -62,6 +62,8 @@ namespace SilentInstall {
         this.DragMove();
       };
 
+      this.versionLabel.Content += Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
       try {
         this.xmlDocument.Load(this.ConfigurationPath);
         this.installer.RunWorkerAsync();
@@ -86,25 +88,75 @@ namespace SilentInstall {
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("install")) {
         Installations.Add(new Installation(n));
       }
+     
+      int installs = 0;
 
       foreach (Installation i in Installations) {
         foreach (InstallationItem item in i.InstallItems) {
+          if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
+            if (this.Debug == "true") { 
+              installs++;
+            }
+            else {
+              if (i.Clients.Contains(Environment.MachineName)) { installs++; }
 
+              if (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName)) { installs++; }
+            }
+          }
+        }
+      }
+
+      this.SetProgressMaximum(installs);
+
+      foreach (Installation i in Installations) {
+        foreach (InstallationItem item in i.InstallItems) {
           if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
             if (this.Debug == "true") {
               InstallSoftware(item, i);
+              this.AdjustProgress();
             }
             else {
               if (i.Clients.Contains(Environment.MachineName)) {
                 InstallSoftware(item, i);
+                this.AdjustProgress();
               }
 
               if (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName)) {
                 InstallSoftware(item, i);
+                this.AdjustProgress();
               }
             }
-          }
+          }        
         }
+      }
+      //WriteOutput("");
+      //WriteOutput("All software upgrades/installations are finished.");
+      //WriteOutput("The software update is now complete and will close shortly. Thank you!");
+      //Thread.Sleep(4000);
+      //App.Current.Shutdown(0);
+    }
+
+    private void AdjustProgress() {
+      if (this.progressBar1.Dispatcher.CheckAccess()) {
+        this.progressBar1.Value++;
+      }
+      else {
+        this.progressBar1.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate() {
+          this.progressBar1.Value++;
+        }));
+      }
+    }
+
+    private void SetProgressMaximum(int max) {
+      if (this.progressBar1.Dispatcher.CheckAccess()) {
+        this.progressBar1.Value = 0;
+        this.progressBar1.Maximum = max;
+      }
+      else {
+        this.progressBar1.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate() {
+          this.progressBar1.Value = 0;
+          this.progressBar1.Maximum = max;
+        }));
       }
     }
 
@@ -141,8 +193,8 @@ namespace SilentInstall {
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
 
-          //p.Start();
-          //p.WaitForExit();
+          p.Start();
+          p.WaitForExit();
         }
       }
 
