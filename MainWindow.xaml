@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" WindowStyle="None" ResizeMode="NoResize"  WindowStartupLocation="CenterScreen" AllowsTransparency="True" Background="Transparent" Height="480" Width="640" >
   
-  <Border Background="#ff333333" CornerRadius="5,5,5,5" BorderBrush="#ffffffff" BorderThickness="1,1,1,1">
+  <Border Name="MainBorder" Background="#EE336699" CornerRadius="5,5,5,5" BorderBrush="#ffffffff" BorderThickness="1,1,1,1">
     <Grid>
-      <TextBox Height="136" VerticalAlignment="Center" Name="textBox1" VerticalScrollBarVisibility="Auto" Style="{StaticResource OutputBox}" AcceptsReturn="True" Margin="36,124,35,124" IsEnabled="False"/>
+      <TextBox Height="136" VerticalAlignment="Center" Name="SummaryText" VerticalScrollBarVisibility="Auto" Style="{StaticResource OutputBox}" AcceptsReturn="True" Margin="36,124,35,124" IsEnabled="False"/>
       
-      <ProgressBar Height="23" HorizontalAlignment="Center" Margin="0,330,0,0" Name="progressBar1" VerticalAlignment="Top" Width="345" Foreground="#FF880000" Background="#FF880000" />
+      <ProgressBar Height="23" HorizontalAlignment="Center" Margin="0,330,0,0" Name="ProgressReport" VerticalAlignment="Top" Width="345" Foreground="#FF880000" Background="#FF999999" BorderBrush="White" />
       <Label Content="Version: " Height="28" HorizontalAlignment="Right" Margin="0,0,6,6" Name="versionLabel" VerticalAlignment="Bottom" Foreground="#ffefefef"  />
-      <Image Height="130" HorizontalAlignment="Left" Margin="0,0,0,0" Name="image1" VerticalAlignment="Top" Width="596" Source="/SilentInstall;component/logo.png" />
+      <Image Height="130" HorizontalAlignment="Left" Margin="0,0,0,0" Name="Logo" VerticalAlignment="Top" Width="596" Source="/SilentInstall;component/logo.png" />
     </Grid>
   </Border>
 </Window>

@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SilentInstall {
   public partial class MainWindow : Window {
@@ -63,6 +64,13 @@ namespace SilentInstall {
       };
 
       this.versionLabel.Content += Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+      // COLOR FUN
+      if (Environment.MachineName == "DRAKE" || Environment.MachineName == "MORTON" || Environment.MachineName == "CLEANMACHINE") {
+        this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EE17365D"));
+        this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFFFFFF"));
+      }
+      // END COLOR FUN
 
       try {
         this.xmlDocument.Load(this.ConfigurationPath);
@@ -133,7 +141,7 @@ namespace SilentInstall {
       WriteOutput("");
       WriteOutput("All software upgrades/installations are finished.");
       WriteOutput("The software update is now complete and will close shortly. Thank you!");
-      Thread.Sleep(4000);
+      Thread.Sleep(10000);
 
       ThreadStart ts = delegate() {
         Dispatcher.BeginInvoke(new Action(delegate() {
@@ -146,38 +154,38 @@ namespace SilentInstall {
 
     #region "Threading Delegate Dispatcher Functions"
     private void AdjustProgress() {
-      if (this.progressBar1.Dispatcher.CheckAccess()) {
-        this.progressBar1.Value++;
+      if (this.ProgressReport.Dispatcher.CheckAccess()) {
+        this.ProgressReport.Value++;
       }
       else {
-        this.progressBar1.Dispatcher.BeginInvoke(new Action(delegate() {
-          this.progressBar1.Value++;
+        this.ProgressReport.Dispatcher.BeginInvoke(new Action(delegate() {
+          this.ProgressReport.Value++;
         }));
       }
     }
 
     private void SetProgressMaximum(int max) {
-      if (this.progressBar1.Dispatcher.CheckAccess()) {
-        this.progressBar1.Value = 0;
-        this.progressBar1.Maximum = max;
+      if (this.ProgressReport.Dispatcher.CheckAccess()) {
+        this.ProgressReport.Value = 0;
+        this.ProgressReport.Maximum = max;
       }
       else {
-        this.progressBar1.Dispatcher.BeginInvoke(new Action(delegate() {
-          this.progressBar1.Value = 0;
-          this.progressBar1.Maximum = max;
+        this.ProgressReport.Dispatcher.BeginInvoke(new Action(delegate() {
+          this.ProgressReport.Value = 0;
+          this.ProgressReport.Maximum = max;
         }));
       }
     }
 
     private void WriteOutput(string message) {
-      if (this.textBox1.Dispatcher.CheckAccess()) {
-        this.textBox1.AppendText(message + "\r\n");
-        this.textBox1.ScrollToEnd();
+      if (this.SummaryText.Dispatcher.CheckAccess()) {
+        this.SummaryText.AppendText(message + "\r\n");
+        this.SummaryText.ScrollToEnd();
       }
       else {
-        this.textBox1.Dispatcher.Invoke(new Action( delegate() {
-          this.textBox1.AppendText(message + "\r\n");
-          this.textBox1.ScrollToEnd();
+        this.SummaryText.Dispatcher.Invoke(new Action(delegate() {
+          this.SummaryText.AppendText(message + "\r\n");
+          this.SummaryText.ScrollToEnd();
         }));
       }
     }

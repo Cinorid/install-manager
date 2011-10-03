@@ -90,7 +90,7 @@
   <install>
     <name>InfoMaker Administration</name>
     <clients>
-		<name>EX4WIN7X64</name>
+		  <name>EX4WIN7X64</name>
       <name>MORTON</name>
       <name>CLEANMACHINE</name>
     </clients>
@@ -128,11 +128,12 @@
   <install>
     <name>SQL Server Management Studio</name>
     <clients>
-		<name>EX4WIN7X64</name>
+		  <name>EX4WIN7X64</name>
       <name>DRAKE</name>
       <name>MORTON</name>
       <name>MINOR</name>
       <name>CLEANMACHINE</name>
+      <name>JICSWEBTSTSRV</name>
     </clients>
     <registry latest-subkey="false" value-pair="CurrentVersion">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
     <install-item>
