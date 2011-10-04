@@ -67,7 +67,7 @@ namespace SilentInstall {
 
       // COLOR FUN
       if (Environment.MachineName == "DRAKE" || Environment.MachineName == "MORTON" || Environment.MachineName == "CLEANMACHINE") {
-        this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EE17365D"));
+        this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EECC6600"));
         this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFFFFFF"));
       }
       // END COLOR FUN
@@ -135,6 +135,13 @@ namespace SilentInstall {
               }
             }
           }        
+        }
+      }
+
+      foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("registry")) {
+        RegistryItem r = new RegistryItem(n);
+        if (r.FixRegistry() > 0) {
+          WriteOutput("Fixing " + r.Name + " registry entry.");
         }
       }
 

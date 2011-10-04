@@ -122,5 +122,80 @@ namespace SilentInstall {
     }
   }
 
+  public class RegistryItem {
 
+    private XmlNode RegistryNode;
+
+    public string Name {
+      get {
+        XmlNode xn = this.RegistryNode.SelectSingleNode("./name");
+        string n = xn != null ? xn.InnerText : "";
+        return n;
+      }
+    }
+
+    public string Root {
+      get {
+        XmlNode xn = this.RegistryNode.SelectSingleNode("./root");
+        string n = xn != null ? xn.InnerText : "";
+        return n;
+      }
+    }
+
+    public string KeyStart {
+      get {
+        XmlNode xn = this.RegistryNode.SelectSingleNode("./key-start");
+        string n = xn != null ? xn.InnerText : "";
+        return n;
+      }
+    }
+
+    public List<string> Clients {
+      get {
+        List<string> list = new List<string>();
+        XmlNodeList xl = this.RegistryNode.SelectNodes("./clients/name");
+
+        foreach (XmlNode n in xl) { list.Add(n.InnerText.Trim().ToUpper()); }
+
+        return list;
+      }
+    }
+
+    public RegistryItem(XmlNode RegistryNode) {
+      this.RegistryNode = RegistryNode;
+    }
+
+    public int FixRegistry() {
+      int flag = 0;
+
+      foreach (XmlNode x in this.RegistryNode.SelectNodes("./subkeys/subkey")) {
+
+        using (RegistryKey key = Registry.CurrentUser.OpenSubKey(this.KeyStart + x.InnerText)) {
+
+          if (key != null) {
+            string nvp = x.Attributes["value-pair"].InnerText;
+            string type = x.Attributes["type"].InnerText;
+            string value = x.Attributes["value"].InnerText;
+
+            try {
+              if (key.GetValue(nvp).ToString() != value) {
+                using (RegistryKey ckey = Registry.CurrentUser.CreateSubKey(this.KeyStart + x.InnerText)) {
+                  ckey.SetValue(nvp, value, RegistryValueKind.DWord);
+                }
+                flag++;
+              }
+            }
+            catch (NullReferenceException) {
+              using (RegistryKey ckey = Registry.CurrentUser.CreateSubKey(this.KeyStart + x.InnerText)) {
+                ckey.SetValue(nvp, value, RegistryValueKind.DWord);
+              }
+              flag++;
+            }
+          }
+        }
+      }
+
+      return flag;
+    }
+  }
 }
