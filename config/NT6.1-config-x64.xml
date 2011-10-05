@@ -161,7 +161,7 @@
   </install>
 
   <registry>
-    <name>Microsoft Office Sql Security Check</name>
+    <name>Microsoft Office</name>
     <clients />
     <root>HKCU</root>
     <key-start>Software\Microsoft\Office\</key-start>

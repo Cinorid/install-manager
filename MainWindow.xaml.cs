@@ -140,7 +140,22 @@ namespace SilentInstall {
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("registry")) {
         RegistryItem r = new RegistryItem(n);
-        if (r.FixRegistry() > 0) {
+        if (r.FixRegistry()) {
+          WriteOutput("Fixing " + r.Name + " registry entry.");
+        }
+        else {
+          WriteOutput("Installing " + r.Name + "...");
+          using (Process p = new Process()) {
+            ProcessStartInfo sinfo = new ProcessStartInfo("cmd", "/c " + r.FailOver);
+
+            sinfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo = sinfo;
+
+            p.Start();
+            p.WaitForExit();
+          }
+          WriteOutput("Finished installing " + r.Name + ".");
+          r.FixRegistry();
           WriteOutput("Fixing " + r.Name + " registry entry.");
         }
       }

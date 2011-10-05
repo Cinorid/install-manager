@@ -161,15 +161,23 @@ namespace SilentInstall {
       }
     }
 
+    public string FailOver {
+      get {
+        XmlNode xn = this.RegistryNode.SelectSingleNode("./fail-over/command");
+        string n = xn != null ? xn.InnerText : "";
+        return n;
+      }
+    }
+
     public RegistryItem(XmlNode RegistryNode) {
       this.RegistryNode = RegistryNode;
     }
 
-    public int FixRegistry() {
-      int flag = 0;
+    public bool FixRegistry() {
+      int found  = 0;
+      int subkeys = this.RegistryNode.SelectNodes("./subkeys/subkey").Count;
 
       foreach (XmlNode x in this.RegistryNode.SelectNodes("./subkeys/subkey")) {
-
         using (RegistryKey key = Registry.CurrentUser.OpenSubKey(this.KeyStart + x.InnerText)) {
 
           if (key != null) {
@@ -177,25 +185,24 @@ namespace SilentInstall {
             string type = x.Attributes["type"].InnerText;
             string value = x.Attributes["value"].InnerText;
 
-            try {
-              if (key.GetValue(nvp).ToString() != value) {
-                using (RegistryKey ckey = Registry.CurrentUser.CreateSubKey(this.KeyStart + x.InnerText)) {
-                  ckey.SetValue(nvp, value, RegistryValueKind.DWord);
-                }
-                flag++;
-              }
-            }
-            catch (NullReferenceException) {
+            if (key.GetValue(nvp) != null && key.GetValue(nvp).ToString() != value) {
               using (RegistryKey ckey = Registry.CurrentUser.CreateSubKey(this.KeyStart + x.InnerText)) {
                 ckey.SetValue(nvp, value, RegistryValueKind.DWord);
               }
-              flag++;
             }
+            else {
+              using (RegistryKey ckey = Registry.CurrentUser.CreateSubKey(this.KeyStart + x.InnerText)) {
+                ckey.SetValue(nvp, value, RegistryValueKind.DWord);
+              }
+            }
+          }
+          else {
+            found++;
           }
         }
       }
 
-      return flag;
+      return found < subkeys ? true : false;
     }
   }
 }
