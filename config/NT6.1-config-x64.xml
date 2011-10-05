@@ -171,7 +171,7 @@
     </subkeys>
     <fail-over>
       <name>Microsoft Office 2010</name>
-      <command type="cmd">"\\172.16.0.6\packages$\Applications\Office 2010\x86\setup.exe" /adminfile "\\172.16.0.6\packages$\Applications\Office 2010\x86\Custom\SilentFullInstall.MSP"</command>
+      <command type="cmd">\\172.16.0.6\packages$\Applications\Office-2010\x86\setup.exe /adminfile \\172.16.0.6\packages$\Applications\Office-2010\x86\Custom\SilentFullInstall.MSP</command>
     </fail-over>
   </registry>
   
