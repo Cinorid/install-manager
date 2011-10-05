@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
+using Microsoft.Win32;
 
 namespace SilentInstall {
   public partial class MainWindow : Window {
@@ -99,6 +100,27 @@ namespace SilentInstall {
      
       int installs = 0;
 
+      foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("uninstall")) {
+        using (RegistryKey key = Registry.LocalMachine.OpenSubKey(n.SelectSingleNode("./registry").InnerText)) {
+          if (key != null) {
+            string name = n.SelectSingleNode("./name").InnerText;
+            string vers = n.SelectSingleNode("./remove-item/version").InnerText;
+
+            WriteOutput(String.Format("Uninstalling {0}  version {1} ...", name, vers));
+            using (Process p = new Process()) {
+              ProcessStartInfo sinfo = new ProcessStartInfo("cmd", "/c " + n.SelectSingleNode("./remove-item/command").InnerText);
+
+              sinfo.WindowStyle = ProcessWindowStyle.Hidden;
+              p.StartInfo = sinfo;
+
+              p.Start();
+              p.WaitForExit();
+            }
+            WriteOutput(String.Format("{0}  version {1} successfully uninstalled.", name, vers));
+          }
+        }
+      }
+
       foreach (Installation i in Installations) {
         foreach (InstallationItem item in i.InstallItems) {
           if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
@@ -107,7 +129,6 @@ namespace SilentInstall {
             }
             else {
               if (i.Clients.Contains(Environment.MachineName)) { installs++; }
-
               if (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName)) { installs++; }
             }
           }

@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
+
+  <uninstall>
+    <name>Jenzabar EX</name>
+    <clients />
+    <registry latest-subkey="false" value-pair="" root="HKLM">Software\CMDS\Teams Elite\3</registry>
+    <remove-item>
+      <version>3.x.x</version>
+      <command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
+    </remove-item>
+  </uninstall>
+  
   <install>
     <name>Jenzabar EX</name>
     <clients />
@@ -159,4 +170,19 @@
       <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x86-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
     </install-item>
   </install>
+
+  <registry>
+    <name>Microsoft Office</name>
+    <clients />
+    <root>HKCU</root>
+    <key-start>Software\Microsoft\Office\</key-start>
+    <subkeys>
+      <subkey value-pair="SqlSecurityCheck" type="REG_DWORD" value="0">14.0\Word\Options</subkey>
+      <subkey value-pair="SqlSecurityCheck" type="REG_DWORD" value="0">12.0\Word\Options</subkey>
+    </subkeys>
+    <fail-over>
+      <name>Microsoft Office 2010</name>
+      <command type="cmd">\\172.16.0.6\packages$\Applications\Office-2010\x86\setup.exe /adminfile \\172.16.0.6\packages$\Applications\Office-2010\x86\Custom\SilentFullInstall.MSP</command>
+    </fail-over>
+  </registry>
 </Configuration>
