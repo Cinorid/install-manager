@@ -75,10 +75,6 @@ namespace SilentInstall {
       }
       // END COLOR FUN
 
-      using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Office\14.0\Word\Options")) {
-        MessageBox.Show(key.GetValue("SqlSecurityCheck").ToString());
-      }
-
       try {
         this.xmlDocument.Load(this.ConfigurationPath);
         this.installer.RunWorkerAsync();
