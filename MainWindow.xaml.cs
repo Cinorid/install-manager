@@ -59,6 +59,8 @@ namespace SilentInstall {
     public MainWindow() {
       InitializeComponent();
 
+      this.ShowInTaskbar = false;
+
       installer.DoWork += new DoWorkEventHandler(ThreadedWorker);
       this.MouseLeftButtonDown += delegate(object sender, MouseButtonEventArgs e) {
         this.DragMove();
@@ -72,6 +74,10 @@ namespace SilentInstall {
         this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFFFFFF"));
       }
       // END COLOR FUN
+
+      using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Office\14.0\Word\Options")) {
+        MessageBox.Show(key.GetValue("SqlSecurityCheck").ToString());
+      }
 
       try {
         this.xmlDocument.Load(this.ConfigurationPath);
@@ -161,10 +167,7 @@ namespace SilentInstall {
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("registry")) {
         RegistryItem r = new RegistryItem(n);
-        if (r.FixRegistry()) {
-          WriteOutput("Fixing " + r.Name + " registry entry.");
-        }
-        else {
+        if (!r.FixRegistry()) {
           WriteOutput("Installing " + r.Name + "...");
           using (Process p = new Process()) {
             ProcessStartInfo sinfo = new ProcessStartInfo("cmd", "/c " + r.FailOver);
