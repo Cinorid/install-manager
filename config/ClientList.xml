@@ -39,5 +39,6 @@
     <name>SS-LOANER-02</name>
     <name>SS-PHOTOID</name>
     <name>SS-SEC</name>
+	<name>XPGOLD</name>
   </clients>
 </Configuration>

@@ -1,6 +1,41 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
 
+ <install>
+    <name>SQL Server Management Studio</name>
+    <clients>
+		  <name>EX4WIN7X64</name>
+      <name>DRAKE</name>
+      <name>MORTON</name>
+      <name>MINOR</name>
+      <name>CLEANMACHINE</name>
+      <name>JICSWEBTSTSRV</name>
+    </clients>
+    <registry latest-subkey="false" value-pair="CurrentVersion" root="HKLM">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
+    <install-item>
+      <version>10.50.1600.1</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN,SSMS,ADV_SSMS /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
+    </install-item>
+    <install-item>
+      <version>10.50.2500.0</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
+    </install-item>
+  </install>
+
+  <install>
+    <name>SQL Server Client Tools</name>
+    <clients />
+    <registry latest-subkey="false" value-pair="CurrentVersion" root="HKLM">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
+    <install-item>
+      <version>10.50.1600.1</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
+    </install-item>
+    <install-item>
+      <version>10.50.2500.0</version>
+      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
+    </install-item>
+  </install>
+
   <uninstall>
     <name>Jenzabar EX</name>
     <clients />
@@ -132,42 +167,7 @@
     </install-item>
   </install>
 
-  <install>
-    <name>SQL Server Management Studio</name>
-    <clients>
-		  <name>EX4WIN7X64</name>
-      <name>DRAKE</name>
-      <name>MORTON</name>
-      <name>MINOR</name>
-      <name>CLEANMACHINE</name>
-      <name>JICSWEBTSTSRV</name>
-    </clients>
-    <registry latest-subkey="false" value-pair="CurrentVersion" root="HKLM">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
-    <install-item>
-      <version>10.50.1600.1</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN,SSMS,ADV_SSMS /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install-item>
-    <install-item>
-      <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install-item>
-  </install>
-
-  <install>
-    <name>SQL Server Client Tools</name>
-    <clients />
-    <registry latest-subkey="false" value-pair="CurrentVersion" root="HKLM">Software\Wow6432Node\Microsoft\Microsoft SQL Server\100\Tools\ClientSetup\CurrentVersion</registry>
-    <install-item>
-      <version>10.50.1600.1</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\setup.exe /Q /ACTION="Install" /FEATURES=CONN /QUIET="True" /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install-item>
-    <install-item>
-      <version>10.50.2500.0</version>
-      <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\SQL2008R2\SP1\SQLServer2008R2SP1-KB2528583-x64-ENU.exe /quiet /IACCEPTSQLSERVERLICENSETERMS</command>
-    </install-item>
-  </install>
-
-  <registry>
+   <registry>
     <name>Microsoft Office</name>
     <clients />
     <root>HKCU</root>
