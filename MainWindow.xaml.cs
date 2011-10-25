@@ -73,6 +73,14 @@ namespace SilentInstall {
         this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EECC6600"));
         this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFFFFFF"));
       }
+      else if (Environment.MachineName == "DIR-BA") {
+        this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFF00FF"));
+        this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EECCCCCC"));
+      }
+      else if (Environment.MachineName == "MINORX64") {
+        this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EE222222"));
+        this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEFEFEF"));
+      }
       // END COLOR FUN
 
       try {
