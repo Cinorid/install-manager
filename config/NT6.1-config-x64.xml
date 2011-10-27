@@ -46,7 +46,7 @@
   <install>
     <name>Jenzabar EX</name>
     <clients />
-    <registry latest-subkey="false" value-pair="ProductVersion">Software\Jenzabar\EX\4\Application</registry>
+    <registry latest-subkey="false" value-pair="ProductVersion">Software\Wow6432Node\Jenzabar\EX\4\Application</registry>
     <remove-item>
       <version>3.0</version>
       <command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>
@@ -60,7 +60,7 @@
       <command type="cmd">"\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.0.2\EX_4.0.2_Update.exe" /s /v/qn</command>
     </install-item>
 -->
-	<install-item>
+	  <install-item>
       <version>4.1.0</version>
       <command type="cmd">\\hadbsvc.fhtc.lan\Jenzabar\EX\Client_Installs\4.1\EX_4.1.0_Setup.exe /S /V" /qn SETUPFILE="\\hadbsvc.fhtc.lan\Jenzabar\Script_Files\EX41Setup.txt"</command>
     </install-item>

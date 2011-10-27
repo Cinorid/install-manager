@@ -13,11 +13,13 @@ using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace SilentInstall {
   public partial class MainWindow : Window {
 
-    private XmlDocument xmlDocument = new XmlDocument();   
+    private XmlDocument xmlDocument = new XmlDocument();
     private BackgroundWorker installer = new BackgroundWorker();
 
     private List<string> ClientList {
@@ -52,7 +54,7 @@ namespace SilentInstall {
     private string Authentication {
       get { return Convert.ToString(Application.Current.Properties["Authentication"]); }
     }
-    private string Debug { 
+    private string Debug {
       get { return Convert.ToString(Application.Current.Properties["Debug"]); }
     }
 
@@ -69,13 +71,9 @@ namespace SilentInstall {
       this.versionLabel.Content += Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
       // COLOR FUN
-      if (Environment.MachineName == "DRAKE" || Environment.MachineName == "MORTON" || Environment.MachineName == "CLEANMACHINE") {
+      if (Environment.MachineName == "DRAKE") {
         this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EECC6600"));
         this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFFFFFF"));
-      }
-      else if (Environment.MachineName == "DIR-BA") {
-        this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEFF00FF"));
-        this.MainBorder.BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EECCCCCC"));
       }
       else if (Environment.MachineName == "MINORX64") {
         this.MainBorder.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EE222222"));
@@ -107,7 +105,7 @@ namespace SilentInstall {
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("install")) {
         Installations.Add(new Installation(n));
       }
-     
+
       int installs = 0;
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("uninstall")) {
@@ -134,7 +132,7 @@ namespace SilentInstall {
       foreach (Installation i in Installations) {
         foreach (InstallationItem item in i.InstallItems) {
           if (new Version(i.CurrentVersion).CompareTo(new Version(item.Version)) == -1) {
-            if (this.Debug == "true") { 
+            if (this.Debug == "true") {
               installs++;
             }
             else {
@@ -165,8 +163,44 @@ namespace SilentInstall {
                 this.AdjustProgress();
               }
             }
-          }        
+          }
         }
+      }
+
+      try {
+        using (SqlConnection cn = new SqlConnection("server=hadbsvc;database=webadmintool;user id=webadminuser;password=flarndip")) {
+          cn.Open();
+          string guid = Guid.NewGuid().ToString();
+          DateTime dt = DateTime.Now;
+          StringBuilder sb = new StringBuilder();
+          sb.AppendFormat(@"NT {0}.", Environment.OSVersion.Version.Major.ToString());
+          sb.AppendFormat(@"{0} - {1} bit", Environment.OSVersion.Version.Minor.ToString(), Environment.Is64BitOperatingSystem ? "64" : "86");
+
+          using (SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[machine_log] ([id], [MachineName], [OSVersion], [Logged]) VALUES(@i, @m, @o, @l)", cn)) {
+            cmd.Parameters.Add("@i", SqlDbType.UniqueIdentifier, 40).Value = Guid.Parse(guid);
+            cmd.Parameters.Add("@m", SqlDbType.VarChar, 25).Value = Environment.MachineName.ToUpper();
+            cmd.Parameters.Add("@o", SqlDbType.VarChar, 15).Value = sb.ToString();
+            cmd.Parameters.Add("@l", SqlDbType.DateTime, 20).Value = dt;
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO [dbo].[software_log] ([mid], [software], [version]) VALUES(@m, @s, @v)";
+
+            foreach (Installation i in Installations) {
+              if (i.Clients.Contains(Environment.MachineName) || (i.Clients.Count == 0 && this.ClientList.Contains(Environment.MachineName))) {
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add("@m", SqlDbType.UniqueIdentifier, 40).Value = Guid.Parse(guid);
+                cmd.Parameters.Add("@s", SqlDbType.VarChar, 30).Value = i.Name;
+                cmd.Parameters.Add("@v", SqlDbType.VarChar, 10).Value = i.CurrentVersion;
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+              }
+            }
+          }
+        }
+      }
+      catch {
+
       }
 
       foreach (XmlNode n in this.xmlDocument.DocumentElement.SelectNodes("registry")) {
@@ -260,7 +294,7 @@ namespace SilentInstall {
 
           sinfo.WindowStyle = ProcessWindowStyle.Hidden;
           p.StartInfo = sinfo;
-          
+
           p.Start();
           p.WaitForExit();
         }
