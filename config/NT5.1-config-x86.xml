@@ -33,7 +33,7 @@
   <uninstall>
     <name>Jenzabar EX</name>
     <clients />
-    <registry latest-subkey="false" value-pair="" root="HKLM">Software\Wow6432Node\CMDS\Teams Elite\3</registry>
+    <registry latest-subkey="false" value-pair="" root="HKLM">Software\CMDS\Teams Elite\3</registry>
     <remove-item>
       <version>3.x.x</version>
       <command type="cmd">msiexec /x {0975FB74-4700-42F3-BDF5-7D43E4390607} /qn</command>

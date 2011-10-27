@@ -3,6 +3,7 @@
   <clients>
 	<name>ACC-PAY</name>
 	<name>ACC-REC</name>
+	<name>ACC-RECNEW</name>
 	<name>ADMIN-LOANER01</name>
 	<name>ADMIN-REP</name>
 	<name>BECKER</name>
@@ -26,8 +27,10 @@
 	<name>EXEC-ASSISTNEW</name>
 	<name>FINAID-OFFICER</name>
 	<name>FOUND-ASSIST</name>
+	<name>FOUND-ASSISTNEW</name>
 	<name>HHS-SEC</name>
 	<name>IT-LOANER</name>
+	<name>JICSWEBPRDSRV</name>
 	<name>JICSWEBTSTSRV</name>
 	<name>MCCOY</name>
 	<name>MINORX64</name>
@@ -39,6 +42,7 @@
 	<name>SS-PHOTOID</name>
 	<name>SS-SEC</name>
 	<name>MORTONVM</name>
+	<name>MORTON</name>
 	<name>EX4WIN7X86-2</name>
 	<name>EX4WIN7X64</name>
   </clients>

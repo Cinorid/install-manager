@@ -72,7 +72,7 @@
     <clients>
 	    <name>DRAKE</name>
 	    <name>MINORX64</name>
-		<name>EX4WIN7X64</name>
+		  <name>EX4WIN7X64</name>
     </clients>
     <install-item>
 	    <version>15.00.000</version>
