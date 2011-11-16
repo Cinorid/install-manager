@@ -174,7 +174,7 @@ namespace SilentInstall {
           DateTime dt = DateTime.Now;
           StringBuilder sb = new StringBuilder();
           sb.AppendFormat(@"NT {0}.", Environment.OSVersion.Version.Major.ToString());
-          sb.AppendFormat(@"{0} - {1} bit", Environment.OSVersion.Version.Minor.ToString(), Environment.Is64BitOperatingSystem ? "64" : "86");
+          sb.AppendFormat(@"{0} - {1} bit", Environment.OSVersion.Version.Minor.ToString(), Environment.Is64BitOperatingSystem ? "64" : "32");
 
           using (SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[machine_log] ([id], [MachineName], [OSVersion], [Logged]) VALUES(@i, @m, @o, @l)", cn)) {
             cmd.Parameters.Add("@i", SqlDbType.UniqueIdentifier, 40).Value = Guid.Parse(guid);
