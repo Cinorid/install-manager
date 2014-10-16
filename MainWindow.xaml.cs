@@ -16,7 +16,7 @@ using Microsoft.Win32;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SilentInstall {
+namespace InstallManager {
   public partial class MainWindow : Window {
 
     private XmlDocument xmlDocument = new XmlDocument();

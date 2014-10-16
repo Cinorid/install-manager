@@ -7,7 +7,7 @@ using System.Windows;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SilentInstall {
+namespace InstallManager {
   /// <summary>
   /// Interaction logic for App.xaml
   /// </summary>

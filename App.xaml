@@ -1,4 +1,4 @@
-﻿<Application x:Class="SilentInstall.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="MainWindow.xaml">
+﻿<Application x:Class="InstallManager.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="MainWindow.xaml">
     <Application.Resources>
     <Style x:Key="OutputBox" TargetType="{x:Type TextBox}">
       <Setter Property="Template">
