@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c2bdf27bc1ac47f09ca9bf0622c32d87" Name="Diagram1">
+        <EntityTypeShape EntityType="InstallModel.ClientMachine" Width="1.875" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="InstallModel.Installation" Width="1.875" PointX="3.625" PointY="1.375" />
+        <EntityTypeShape EntityType="InstallModel.InstallationItem" Width="1.875" PointX="0.75" PointY="3.25" />
+        <AssociationConnector Association="InstallModel.FK_InstallationItem_Installation" />
+        <AssociationConnector Association="InstallModel.ClientInstallation" />
+        <AssociationConnector Association="InstallModel.InstallationRequirement" ManuallyRouted="true" >
+          <ConnectorPoint PointX="5.5" PointY="2.4947036076688218" />
+          <ConnectorPoint PointX="5.75" PointY="2.4947036076688218" />
+          <ConnectorPoint PointX="5.75" PointY="2.0237440999348957" />
+          <ConnectorPoint PointX="5.5" PointY="2.0237440999348957" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

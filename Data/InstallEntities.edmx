@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InstallModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientInstallation">
+          <Key>
+            <PropertyRef Name="Install" />
+            <PropertyRef Name="Client" />
+          </Key>
+          <Property Name="Install" Type="bigint" Nullable="false" />
+          <Property Name="Client" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientMachine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComputerName" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Installation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="ExecutablePath" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegistryPath" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="InstallationItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstallationID" Type="bigint" Nullable="false" />
+          <Property Name="Version" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CopyTo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CommandText" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstallationRequirement">
+          <Key>
+            <PropertyRef Name="Install" />
+            <PropertyRef Name="PreRequisite" />
+          </Key>
+          <Property Name="Install" Type="bigint" Nullable="false" />
+          <Property Name="PreRequisite" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClientInstallation_ClientMachine">
+          <End Role="ClientMachine" Type="Self.ClientMachine" Multiplicity="1" />
+          <End Role="ClientInstallation" Type="Self.ClientInstallation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientMachine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientInstallation">
+              <PropertyRef Name="Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientInstallation_Installation">
+          <End Role="Installation" Type="Self.Installation" Multiplicity="1" />
+          <End Role="ClientInstallation" Type="Self.ClientInstallation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientInstallation">
+              <PropertyRef Name="Install" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InstallationItem_Installation">
+          <End Role="Installation" Type="Self.Installation" Multiplicity="1" />
+          <End Role="InstallationItem" Type="Self.InstallationItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InstallationItem">
+              <PropertyRef Name="InstallationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Master_Installation">
+          <End Role="Installation" Type="Self.Installation" Multiplicity="1" />
+          <End Role="InstallationRequirement" Type="Self.InstallationRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InstallationRequirement">
+              <PropertyRef Name="Install" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PreRequisite_Installation">
+          <End Role="Installation" Type="Self.Installation" Multiplicity="1" />
+          <End Role="InstallationRequirement" Type="Self.InstallationRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InstallationRequirement">
+              <PropertyRef Name="PreRequisite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InstallModelStoreContainer">
+          <EntitySet Name="ClientInstallation" EntityType="Self.ClientInstallation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientMachine" EntityType="Self.ClientMachine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Installation" EntityType="Self.Installation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstallationItem" EntityType="Self.InstallationItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstallationRequirement" EntityType="Self.InstallationRequirement" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ClientInstallation_ClientMachine" Association="Self.FK_ClientInstallation_ClientMachine">
+            <End Role="ClientMachine" EntitySet="ClientMachine" />
+            <End Role="ClientInstallation" EntitySet="ClientInstallation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientInstallation_Installation" Association="Self.FK_ClientInstallation_Installation">
+            <End Role="Installation" EntitySet="Installation" />
+            <End Role="ClientInstallation" EntitySet="ClientInstallation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InstallationItem_Installation" Association="Self.FK_InstallationItem_Installation">
+            <End Role="Installation" EntitySet="Installation" />
+            <End Role="InstallationItem" EntitySet="InstallationItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Master_Installation" Association="Self.FK_Master_Installation">
+            <End Role="Installation" EntitySet="Installation" />
+            <End Role="InstallationRequirement" EntitySet="InstallationRequirement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PreRequisite_Installation" Association="Self.FK_PreRequisite_Installation">
+            <End Role="Installation" EntitySet="Installation" />
+            <End Role="InstallationRequirement" EntitySet="InstallationRequirement" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InstallModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InstallEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientMachines" EntityType="InstallModel.ClientMachine" />
+          <EntitySet Name="Installations" EntityType="InstallModel.Installation" />
+          <EntitySet Name="InstallationItems" EntityType="InstallModel.InstallationItem" />
+          <AssociationSet Name="FK_InstallationItem_Installation" Association="InstallModel.FK_InstallationItem_Installation">
+            <End Role="Installation" EntitySet="Installations" />
+            <End Role="InstallationItem" EntitySet="InstallationItems" />
+          </AssociationSet>
+          <AssociationSet Name="ClientInstallation" Association="InstallModel.ClientInstallation">
+            <End Role="ClientMachine" EntitySet="ClientMachines" />
+            <End Role="Installation" EntitySet="Installations" />
+          </AssociationSet>
+          <AssociationSet Name="InstallationRequirement" Association="InstallModel.InstallationRequirement">
+            <End Role="Installation" EntitySet="Installations" />
+            <End Role="Installation1" EntitySet="Installations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClientMachine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComputerName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Installations" Relationship="InstallModel.ClientInstallation" FromRole="ClientMachine" ToRole="Installation" />
+        </EntityType>
+        <EntityType Name="Installation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ExecutablePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegistryPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InstallationItems" Relationship="InstallModel.FK_InstallationItem_Installation" FromRole="Installation" ToRole="InstallationItem" />
+          <NavigationProperty Name="ClientMachines" Relationship="InstallModel.ClientInstallation" FromRole="Installation" ToRole="ClientMachine" />
+          <NavigationProperty Name="Installation1" Relationship="InstallModel.InstallationRequirement" FromRole="Installation" ToRole="Installation1" />
+          <NavigationProperty Name="Installations" Relationship="InstallModel.InstallationRequirement" FromRole="Installation1" ToRole="Installation" />
+        </EntityType>
+        <EntityType Name="InstallationItem">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstallationID" Type="Int64" Nullable="false" />
+          <Property Name="Version" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CopyTo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CommandText" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Installation" Relationship="InstallModel.FK_InstallationItem_Installation" FromRole="InstallationItem" ToRole="Installation" />
+        </EntityType>
+        <Association Name="FK_InstallationItem_Installation">
+          <End Type="InstallModel.Installation" Role="Installation" Multiplicity="1" />
+          <End Type="InstallModel.InstallationItem" Role="InstallationItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Installation">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="InstallationItem">
+              <PropertyRef Name="InstallationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientInstallation">
+          <End Type="InstallModel.ClientMachine" Role="ClientMachine" Multiplicity="*" />
+          <End Type="InstallModel.Installation" Role="Installation" Multiplicity="*" />
+        </Association>
+        <Association Name="InstallationRequirement">
+          <End Type="InstallModel.Installation" Role="Installation" Multiplicity="*" />
+          <End Type="InstallModel.Installation" Role="Installation1" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InstallModelStoreContainer" CdmEntityContainer="InstallEntities">
+          <EntitySetMapping Name="ClientMachines">
+            <EntityTypeMapping TypeName="InstallModel.ClientMachine">
+              <MappingFragment StoreEntitySet="ClientMachine">
+                <ScalarProperty Name="ComputerName" ColumnName="ComputerName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Installations">
+            <EntityTypeMapping TypeName="InstallModel.Installation">
+              <MappingFragment StoreEntitySet="Installation">
+                <ScalarProperty Name="RegistryPath" ColumnName="RegistryPath" />
+                <ScalarProperty Name="ExecutablePath" ColumnName="ExecutablePath" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstallationItems">
+            <EntityTypeMapping TypeName="InstallModel.InstallationItem">
+              <MappingFragment StoreEntitySet="InstallationItem">
+                <ScalarProperty Name="CommandText" ColumnName="CommandText" />
+                <ScalarProperty Name="CopyTo" ColumnName="CopyTo" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="InstallationID" ColumnName="InstallationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ClientInstallation" TypeName="InstallModel.ClientInstallation" StoreEntitySet="ClientInstallation">
+            <EndProperty Name="Installation">
+              <ScalarProperty Name="ID" ColumnName="Install" />
+            </EndProperty>
+            <EndProperty Name="ClientMachine">
+              <ScalarProperty Name="ID" ColumnName="Client" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="InstallationRequirement" TypeName="InstallModel.InstallationRequirement" StoreEntitySet="InstallationRequirement">
+            <EndProperty Name="Installation1">
+              <ScalarProperty Name="ID" ColumnName="PreRequisite" />
+            </EndProperty>
+            <EndProperty Name="Installation">
+              <ScalarProperty Name="ID" ColumnName="Install" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

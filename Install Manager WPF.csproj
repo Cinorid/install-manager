@@ -15,6 +15,21 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>InstallManager.App</StartupObject>
@@ -41,6 +56,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>\\webappsrv\d$\web-applications\webadmin.fhtc.lan\bin\System.Management.Automation.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,6 +82,30 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\ClientMachine.cs">
+      <DependentUpon>InstallEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Installation.cs">
+      <DependentUpon>InstallEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InstallationItem.cs">
+      <DependentUpon>InstallEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InstallEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstallEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InstallEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstallEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InstallEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstallEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Installation.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -91,6 +132,23 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
+    <EntityDeploy Include="Data\InstallEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>InstallEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\InstallEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InstallEntities.edmx</DependentUpon>
+      <LastGenOutput>InstallEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Data\InstallEntities.edmx.diagram">
+      <DependentUpon>InstallEntities.edmx</DependentUpon>
+    </None>
+    <None Include="Data\InstallEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>InstallEntities.edmx</DependentUpon>
+      <LastGenOutput>InstallEntities.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -102,7 +160,38 @@
     <Resource Include="logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="database-init.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="database-init_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>database-init.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

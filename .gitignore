@@ -5,5 +5,7 @@
 /obj/Debug
 /bin/Debug
 /packages
-/InstallManager.csproj.user
-/JenzabarSilentInstall.v12.suo
+/bin/Release
+/obj/Release
+*.user
+*.suo
